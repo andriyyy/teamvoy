@@ -76,17 +76,17 @@ class crud_article extends dataprocessing
     //редагувати завдання
     public function updateArticle()
     {
-        $id = $this->CheckUserData($_POST['update']);
+        $id = $_POST['id'];
         $content = trim($this->CheckUserData($_POST['content']));
 
-        if ($id)
+        if ($_POST['update'])
         {
             try
             {
-                $user = $this->getArticleById((int)$_POST['delete']);
-                if($_SESSION['username'] == $user['login']) {
+
+                if($_SESSION['id']) {
                     $this->ConnectDB();
-                    $query = "UPDATE article SET content='{$content}' WHERE id=$id";
+                    $query = "UPDATE article SET content='{$content}' WHERE user_id={$_SESSION['id']} and id={$id}  ";
                     mysql_query($query);
                     header('Location: ../index.php');
                 }

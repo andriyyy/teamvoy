@@ -47,7 +47,7 @@ class dataprocessing
     //Пошук email в базі
     public function FindEmail($email)
     {
-        $conn = $this->ConnectDB();
+        $this->ConnectDB();
         $result =  mysql_query("SELECT email FROM user WHERE email = '$email'");
         $num_rows = mysql_num_rows($result);
         return $num_rows;
